@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Solar Energy Monitoring</title>
+
+    <link rel="stylesheet" href="STYLE.CSS">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            ☀️
+            <span>SolarAI</span>
+        </div>
+
+        <nav>
+            <a href="#" class="active" onclick="showSection('dashboard')">
+                📊 Dashboard
+            </a>
+
+            <a href="#" onclick="showSection('monitoring')">
+                ⚡ Live Monitoring
+            </a>
+
+            <a href="#" onclick="showSection('analytics')">
+                🤖 AI Analytics
+            </a>
+
+            <a href="#" onclick="showSection('history')">
+                📈 Energy History
+            </a>
+
+            <a href="#" onclick="showSection('alerts')">
+                🚨 Alerts
+            </a>
+
+            <a href="#" onclick="showSection('settings')">
+                ⚙️ Settings
+            </a>
+        </nav>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+
+        <!-- TOP BAR -->
+        <header class="topbar">
+
+            <div>
+                <h1 id="pageTitle">Solar Dashboard</h1>
+                <p>AI-Based Smart Solar Energy Monitoring System</p>
+            </div>
+
+            <div class="status">
+                <span class="online-dot"></span>
+                System Online
+            </div>
+
+        </header>
+
+
+        <!-- DASHBOARD -->
+        <section id="dashboard" class="section active-section">
+
+            <!-- STAT CARDS -->
+            <div class="cards">
+
+                <div class="card">
+                    <div class="card-icon">☀️</div>
+                    <p>Solar Generation</p>
+                    <h2 id="solarPower">4.82 kW</h2>
+                    <span class="positive">↑ 12.4% today</span>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">⚡</div>
+                    <p>Energy Consumed</p>
+                    <h2 id="energyConsumed">3.26 kWh</h2>
+                    <span class="positive">↓ 8.2% today</span>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🔋</div>
+                    <p>Battery Level</p>
+                    <h2 id="battery">78%</h2>
+                    <span class="normal">Healthy</span>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">💰</div>
+                    <p>Today's Savings</p>
+                    <h2 id="savings">₹146</h2>
+                    <span class="positive">↑ ₹24 vs yesterday</span>
+                </div>
+
+            </div>
+
+
+            <!-- CHART + SYSTEM STATUS -->
+            <div class="grid">
+
+                <div class="panel chart-panel">
+
+                    <div class="panel-header">
+                        <div>
+                            <h2>Solar Generation</h2>
+                            <p>Today's energy production</p>
+                        </div>
+
+                        <select id="chartPeriod" onchange="changeChart()">
+                            <option value="today">Today</option>
+                            <option value="week">This Week</option>
+                        </select>
+                    </div>
+
+                    <canvas id="solarChart"></canvas>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-header">
+                        <div>
+                            <h2>System Status</h2>
+                            <p>Current equipment condition</p>
+                        </div>
+                    </div>
+
+                    <div class="system-item">
+                        <span>☀️ Solar Panels</span>
+                        <strong class="green">Normal</strong>
+                    </div>
+
+                    <div class="system-item">
+                        <span>🔋 Battery</span>
+                        <strong class="green">Healthy</strong>
+                    </div>
+
+                    <div class="system-item">
+                        <span>⚡ Grid Connection</span>
+                        <strong class="green">Connected</strong>
+                    </div>
+
+                    <div class="system-item">
+                        <span>🌡️ Panel Temperature</span>
+                        <strong>42°C</strong>
+                    </div>
+
+                    <div class="system-item">
+                        <span>📡 Sensor Connection</span>
+                        <strong class="green">Online</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- AI RECOMMENDATION -->
+            <div class="ai-box">
+
+                <div class="ai-icon">🤖</div>
+
+                <div>
+                    <h2>AI Energy Recommendation</h2>
+
+                    <p id="aiMessage">
+                        High solar generation is expected between
+                        11 AM – 2 PM. Run high-power appliances during
+                        this period to reduce grid consumption.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- LIVE MONITORING -->
+        <section id="monitoring" class="section">
+
+            <h2>Live Energy Monitoring</h2>
+            <p class="section-description">
+                Real-time solar system parameters.
+            </p>
+
+            <div class="cards">
+
+                <div class="card">
+                    <p>Voltage</p>
+                    <h2 id="voltage">230 V</h2>
+                    <span class="normal">Stable</span>
+                </div>
+
+                <div class="card">
+                    <p>Current</p>
+                    <h2 id="current">20.9 A</h2>
+                    <span class="normal">Normal</span>
+                </div>
+
+                <div class="card">
+                    <p>Power</p>
+                    <h2 id="livePower">4.82 kW</h2>
+                    <span class="normal">Generating</span>
+                </div>
+
+                <div class="card">
+                    <p>Temperature</p>
+                    <h2 id="temperature">42°C</h2>
+                    <span class="normal">Safe</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- AI ANALYTICS -->
+        <section id="analytics" class="section">
+
+            <h2>🤖 AI Analytics</h2>
+
+            <p class="section-description">
+                AI-powered prediction and system analysis.
+            </p>
+
+            <div class="analytics-grid">
+
+                <div class="panel">
+
+                    <h3>Tomorrow's Solar Prediction</h3>
+
+                    <div class="prediction">
+                        <span>Expected Generation</span>
+                        <strong>21.4 kWh</strong>
+                    </div>
+
+                    <div class="prediction">
+                        <span>Expected Efficiency</span>
+                        <strong>91%</strong>
+                    </div>
+
+                    <div class="prediction">
+                        <span>Peak Generation</span>
+                        <strong>12:30 PM</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <h3>AI System Analysis</h3>
+
+                    <div class="analysis-item">
+                        <span>Panel Performance</span>
+                        <strong class="green">Excellent</strong>
+                    </div>
+
+                    <div class="analysis-item">
+                        <span>Energy Consumption</span>
+                        <strong class="green">Optimal</strong>
+                    </div>
+
+                    <div class="analysis-item">
+                        <span>Battery Health</span>
+                        <strong class="green">Good</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="ai-box">
+
+                <div class="ai-icon">💡</div>
+
+                <div>
+
+                    <h2>AI Insight</h2>
+
+                    <p>
+                        Your system is currently operating efficiently.
+                        Based on historical consumption, approximately
+                        18% more energy can be saved by shifting
+                        high-power loads to peak solar hours.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- HISTORY -->
+        <section id="history" class="section">
+
+            <h2>📈 Energy History</h2>
+
+            <p class="section-description">
+                Historical solar generation and consumption data.
+            </p>
+
+            <div class="panel">
+
+                <canvas id="historyChart"></canvas>
+
+            </div>
+
+        </section>
+
+
+        <!-- ALERTS -->
+        <section id="alerts" class="section">
+
+            <h2>🚨 System Alerts</h2>
+
+            <p class="section-description">
+                Recent system notifications.
+            </p>
+
+            <div class="alert success-alert">
+                <span>✓</span>
+                <div>
+                    <strong>Solar panels operating normally</strong>
+                    <p>No performance issues detected.</p>
+                </div>
+            </div>
+
+            <div class="alert warning-alert">
+                <span>⚠</span>
+                <div>
+                    <strong>High temperature detected</strong>
+                    <p>Panel temperature reached 42°C.</p>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- SETTINGS -->
+        <section id="settings" class="section">
+
+            <h2>⚙️ System Settings</h2>
+
+            <p class="section-description">
+                Configure your solar monitoring system.
+            </p>
+
+            <div class="panel settings-panel">
+
+                <label>
+                    Solar Panel Capacity
+                    <input type="number" value="5">
+                </label>
+
+                <label>
+                    Battery Capacity
+                    <input type="number" value="10">
+                </label>
+
+                <label>
+                    System Location
+                    <input type="text" value="India">
+                </label>
+
+                <button onclick="saveSettings()">
+                    Save Settings
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="SCRIPT.JS"></script>
+
+</body>
+</html>
